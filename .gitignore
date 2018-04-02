@@ -20,3 +20,4 @@ test.py
 .DS_Store
 resource/__pychache__/
 util/__pycache__/
+.idea/
