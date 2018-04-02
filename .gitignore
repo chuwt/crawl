@@ -8,7 +8,7 @@ venv/
 celerybealst.pid
 celerybeat-schedule.db
 dump.rdb
-.idea
+/.idea/
 app.log
 .log
 migrations/
@@ -20,4 +20,4 @@ test.py
 .DS_Store
 resource/__pychache__/
 util/__pycache__/
-.idea/
+
