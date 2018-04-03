@@ -14,16 +14,20 @@ import argparse
 
 class Resource:
     def __init__(self):
-        self.data = ''
+        self.type = 'http'
         self.url = ''
         self.method = ''
-        self.headers = {}
+        self.headers = dict()
         self.proxies = None
+        self.send_msg = list()
 
     def params(self):
         pass
 
     def magic(self, resp):
+        pass
+
+    def ws_magic(self, resp):
         pass
 
     async def fetch(self, url):
@@ -42,21 +46,38 @@ class Resource:
                 raise ValueError('method')
             return url, data
 
+    async def ws_fetch(self, url):
+        async with aiohttp.ClientSession().ws_connect(url) as ws:
+            for sender_msg in self.send_msg:
+                await ws.send_str(sender_msg)
+            async for msg in ws:
+                if msg.type == aiohttp.WSMsgType.TEXT:
+                    self.ws_magic(msg.data)
+                elif msg.type == aiohttp.WSMsgType.CLOSED:
+                    await ws.close()
+                elif msg.type == aiohttp.WSMsgType.ERROR:
+                    await ws.close()
+
     async def work(self):
         """
         构造处理函数
         :return:
         """
         self.params()
-        if isinstance(self.url, list):
-            fetch = [asyncio.ensure_future(self.fetch(url)) for url in self.url]
-            await asyncio.wait(fetch)
-            data = [resp.result() for resp in fetch]
+        if self.type.startswith('ws'):
+            task = list()
+            task.append(asyncio.ensure_future(self.ws_fetch(self.url)))
+            await asyncio.wait(task)
         else:
-            fetch = [asyncio.ensure_future(self.fetch(self.url))]
-            await asyncio.wait(fetch)
-            url, data = fetch[0].result()
-        self.magic(data)
+            if isinstance(self.url, list):
+                fetch = [asyncio.ensure_future(self.fetch(url)) for url in self.url]
+                await asyncio.wait(fetch)
+                data = [resp.result() for resp in fetch]
+            else:
+                fetch = [asyncio.ensure_future(self.fetch(self.url))]
+                await asyncio.wait(fetch)
+                url, data = fetch[0].result()
+            self.magic(data)
 
 
 class Task:
