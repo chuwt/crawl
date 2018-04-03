@@ -23,8 +23,7 @@ class WsTest(Resource):
     def params(self):
         self.type = 'ws'
         self.url = 'ws://192.168.10.134:8082'
-        self.send_msg = ['{"id":2,"method":"state.subscribe","params":{"marketlist":["btc_usdt","eth_usdt","eth_btc"]}}']
-        # self.send_msg = ['{"op": "<command>", "args": ["arg1", "arg2", "arg3"]}']
+        self.send_msg = ['{"op": "<command>", "args": ["arg1", "arg2", "arg3"]}']
 
     def ws_magic(self, resp):
         print(resp)

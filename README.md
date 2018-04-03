@@ -26,10 +26,11 @@ a convenient web crawl proj
         def params(self):
             self.type = 'ws'
             self.url = 'ws://121.40.165.18:8088'
+            self.send_msg = ['{"op": "<command>", "args": ["arg1", "arg2", "arg3"]}']
 
         def ws_magic(self, resp):
             print(resp)
-    
+
 
 
 # Donation
