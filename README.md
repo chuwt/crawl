@@ -5,7 +5,6 @@ a convenient web crawl proj
 ###example
 	from crawal	import Task, Resource
 
-
 	class Test(Resource):
 	    def params(self):
 	        # 配置url, method 等请求参数
