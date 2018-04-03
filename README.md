@@ -20,10 +20,20 @@ a convenient web crawl proj
 	task.add_task('test', Test())
 	task.run()
 
+### websocket example
+
+    class WsTest(Resource):
+        def params(self):
+            self.type = 'ws'
+            self.url = 'ws://121.40.165.18:8088'
+
+        def ws_magic(self, resp):
+            print(resp)
+    
+
 
 # Donation
    - BTC: 1D1nXVy1nRhSMN6dYh4MgMSXiMXgVS7cW3
    - BCH: 1D1nXVy1nRhSMN6dYh4MgMSXiMXgVS7cW3
    - ETH: 0x5d6ca1adc871710f68a648d315e5aed6a427936a
 
-   
