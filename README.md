@@ -4,7 +4,8 @@ a convenient web crawl proj
 这是一个方便编写异步爬虫的应用工具，仿照flask风格编写
 ### example
 
-	from crawal	import Task, Resource
+    from crawl import Task
+    from crawl import Resource
 
 	class Test(Resource):
 	    def params(self):
