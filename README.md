@@ -2,6 +2,12 @@
 a convenient web crawl proj
 
 这是一个方便编写异步爬虫的应用工具，仿照flask风格编写
+
+# todo list
+- 完善websocket 方式，目前只支持一次性发送，类似返回ping的时候并不会发送pong
+- 增加定时请求和循环请求
+- 其他想到再加
+
 ### example
 
     from crawl import Task

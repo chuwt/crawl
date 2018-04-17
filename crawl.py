@@ -20,6 +20,7 @@ class Resource:
         self.headers = dict()
         self.proxies = None
         self.send_msg = list()
+        self.data = ''
 
     def params(self):
         pass
