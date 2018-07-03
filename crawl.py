@@ -6,8 +6,11 @@ Created by chuwt on 18/4/2.
 import asyncio
 import aiohttp
 # third
+import uvloop
 import argparse
 # self
+
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 # ARGS = argparse.ArgumentParser(descriptioin='A free proxy crawal')
 
